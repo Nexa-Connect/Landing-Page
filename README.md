@@ -8,7 +8,7 @@ Landing page da Nexa Connect, startup brasileira de Caruaru-PE especializada em 
 - Ant Design
 - CSS Modules
 - Internacionalização (7 idiomas)
-- Docker + Nginx
+- Docker
 
 ## Desenvolvimento
 
@@ -26,10 +26,6 @@ npm run build
 ## Docker
 
 ```bash
-# Build e rodar
-docker-compose up -d
-
-# Ou direto com docker run
 docker run -d -p 5173:5173 --restart always imagesnexaconnect/landing-page:latest
 ```
 
