@@ -12,12 +12,14 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM nginx:alpine
+FROM node:20-alpine
 
-COPY --from=build /app/dist /usr/share/nginx/html
+RUN npm install -g serve
 
-RUN sed -i 's/listen\s*80;/listen 5173;/g' /etc/nginx/conf.d/default.conf
+WORKDIR /app
+
+COPY --from=build /app/dist .
 
 EXPOSE 5173
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", ".", "-l", "5173"]

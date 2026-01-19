@@ -33,8 +33,6 @@ docker-compose up -d
 docker run -d -p 5173:5173 --restart always imagesnexaconnect/landing-page:latest
 ```
 
-Acesse: http://localhost:5173
-
 ## Idiomas Suportados
 
 - Português (Brasil)
