@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  landing-page:
+    image: imagesnexaconnect/landing-page:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-80}:80"
+    restart: always
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

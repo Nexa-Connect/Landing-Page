@@ -1,0 +1,194 @@
+:root {
+  --color-primary: #61199E;
+  --color-primary-light: #7B2EB8;
+  --color-primary-dark: #4A1278;
+  --color-secondary: #212020;
+  --color-tertiary: #FAF7FF;
+  --color-text: #212020;
+  --color-text-light: #666666;
+  --color-text-inverse: #FAF7FF;
+
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+
+  --shadow-sm: 0 2px 8px rgba(97, 25, 158, 0.08);
+  --shadow-md: 0 4px 20px rgba(97, 25, 158, 0.12);
+  --shadow-lg: 0 8px 40px rgba(97, 25, 158, 0.16);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-tertiary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeSpeed;
+  min-height: 100vh;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-tertiary);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
+/* Ant Design Overrides */
+.ant-btn-primary {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  font-family: var(--font-display);
+  font-weight: 500;
+  border-radius: var(--radius-sm) !important;
+  height: auto !important;
+  padding: 12px 32px !important;
+  font-size: 15px !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease !important;
+}
+
+.ant-btn-primary:hover {
+  background: var(--color-primary-light) !important;
+  border-color: var(--color-primary-light) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.ant-btn-default {
+  font-family: var(--font-display);
+  font-weight: 500;
+  border-radius: var(--radius-sm) !important;
+  height: auto !important;
+  padding: 12px 32px !important;
+  font-size: 15px !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  transition: all 0.2s ease !important;
+}
+
+.ant-btn-default:hover {
+  background: var(--color-primary) !important;
+  color: var(--color-tertiary) !important;
+  transform: translateY(-2px);
+}
+
+.ant-input,
+.ant-input-affix-wrapper {
+  font-family: var(--font-body);
+  border-radius: var(--radius-sm) !important;
+  padding: 12px 16px !important;
+  border-color: #e0e0e0 !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.ant-input:focus,
+.ant-input-affix-wrapper:focus,
+.ant-input:hover,
+.ant-input-affix-wrapper:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 2px rgba(97, 25, 158, 0.1) !important;
+}
+
+.ant-form-item-label > label {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-secondary) !important;
+}
+
+/* Large screens / TV */
+@media (min-width: 1920px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  html {
+    font-size: 14px;
+  }
+
+  .ant-btn-primary,
+  .ant-btn-default {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* Performance: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

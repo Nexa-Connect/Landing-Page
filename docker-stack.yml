@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  landing-page:
+    image: imagesnexaconnect/landing-page:latest
+    ports:
+      - "${PORT:-80}:80"
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: any
+        delay: 5s
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - web
+
+networks:
+  web:
+    driver: overlay

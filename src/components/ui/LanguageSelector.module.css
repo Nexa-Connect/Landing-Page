@@ -1,0 +1,130 @@
+.selector {
+  position: relative;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(97, 25, 158, 0.08);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+}
+
+.trigger:hover {
+  background: rgba(97, 25, 158, 0.12);
+  border-color: rgba(97, 25, 158, 0.15);
+}
+
+.flag {
+  display: inline-flex;
+  width: 22px;
+  height: 16px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.code {
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+.arrow {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+}
+
+.arrowOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 180px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(97, 25, 158, 0.18);
+  border: 1px solid rgba(97, 25, 158, 0.08);
+  padding: 0.5rem;
+  list-style: none;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.option:hover {
+  background: rgba(97, 25, 158, 0.08);
+}
+
+.optionActive {
+  background: rgba(97, 25, 158, 0.12);
+}
+
+.optionActive .name {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .trigger {
+    padding: 0.45rem 0.6rem;
+  }
+
+  .flag {
+    font-size: 1.2rem;
+  }
+
+  .code {
+    font-size: 0.75rem;
+  }
+
+  .dropdown {
+    right: -0.5rem;
+    min-width: 160px;
+  }
+}
