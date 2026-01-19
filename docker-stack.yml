@@ -4,7 +4,7 @@ services:
   landing-page:
     image: imagesnexaconnect/landing-page:latest
     ports:
-      - "5173:80"
+      - "5173:5173"
     deploy:
       replicas: 2
       restart_policy:
@@ -22,7 +22,7 @@ services:
           cpus: '0.1'
           memory: 64M
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:5173"]
       interval: 30s
       timeout: 10s
       retries: 3
