@@ -1,0 +1,162 @@
+---
+import LanguageSelector from './LanguageSelector.astro'
+---
+
+<header
+  id="header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+  <div class="max-w-[1200px] mx-auto px-6 h-[72px] flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#inicio" class="flex items-center gap-3 group" aria-label="Nexa Connect - Início">
+      <img
+        src="/Logo_somente_icone.png"
+        alt="Nexa Connect"
+        class="h-9 w-auto"
+      />
+      <span class="font-display font-bold text-lg text-[#212020] tracking-tight hidden sm:block">
+        Nexa Connect
+      </span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:flex items-center gap-10">
+      <a href="#inicio" class="nav-link text-sm font-medium text-[#666] hover:text-primary-600 transition-colors duration-200 relative" data-i18n="nav.home">Início</a>
+      <a href="#servicos" class="nav-link text-sm font-medium text-[#666] hover:text-primary-600 transition-colors duration-200 relative" data-i18n="nav.services">Serviços</a>
+      <a href="#sobre" class="nav-link text-sm font-medium text-[#666] hover:text-primary-600 transition-colors duration-200 relative" data-i18n="nav.about">Sobre</a>
+      <a href="#contato" class="nav-link text-sm font-medium text-[#666] hover:text-primary-600 transition-colors duration-200 relative" data-i18n="nav.contact">Contato</a>
+    </nav>
+
+    <!-- Right side -->
+    <div class="flex items-center gap-4">
+      <LanguageSelector />
+
+      <a
+        href="#contato"
+        class="hidden lg:inline-flex items-center px-5 py-2.5 bg-primary-600 text-white text-sm font-display font-medium rounded-lg hover:bg-primary-500 hover:shadow-lg transition-all duration-200"
+        data-i18n="nav.contact"
+      >
+        Contato
+      </a>
+
+      <!-- Mobile menu button -->
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-primary-50 transition-colors cursor-pointer"
+        aria-label="Menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 12h18M3 6h18M3 18h18" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu overlay -->
+<div
+  id="mobile-overlay"
+  class="fixed inset-0 bg-black/50 z-[60] hidden opacity-0 transition-opacity duration-300 lg:hidden"
+></div>
+
+<!-- Mobile menu panel -->
+<div
+  id="mobile-panel"
+  class="fixed top-0 right-0 bottom-0 w-72 bg-white shadow-2xl z-[70] transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+>
+  <div class="flex items-center justify-between p-6 border-b border-gray-100">
+    <span class="font-display font-bold text-lg text-[#212020]">Menu</span>
+    <button
+      type="button"
+      id="mobile-close-btn"
+      class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-primary-50 transition-colors cursor-pointer"
+      aria-label="Fechar menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="flex flex-col p-6 gap-2">
+    <a href="#inicio" class="mobile-nav-link flex items-center px-4 py-3 rounded-lg text-[#444] hover:bg-primary-50 hover:text-primary-600 font-medium transition-all" data-i18n="nav.home">Início</a>
+    <a href="#servicos" class="mobile-nav-link flex items-center px-4 py-3 rounded-lg text-[#444] hover:bg-primary-50 hover:text-primary-600 font-medium transition-all" data-i18n="nav.services">Serviços</a>
+    <a href="#sobre" class="mobile-nav-link flex items-center px-4 py-3 rounded-lg text-[#444] hover:bg-primary-50 hover:text-primary-600 font-medium transition-all" data-i18n="nav.about">Sobre</a>
+    <a href="#contato" class="mobile-nav-link flex items-center px-4 py-3 rounded-lg text-[#444] hover:bg-primary-50 hover:text-primary-600 font-medium transition-all" data-i18n="nav.contact">Contato</a>
+  </nav>
+</div>
+
+<style>
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary-600);
+    transition: width 0.2s ease;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  header.scrolled {
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(97, 25, 158, 0.08);
+  }
+</style>
+
+<script>
+  const header = document.getElementById('header')!
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn')!
+  const mobileCloseBtn = document.getElementById('mobile-close-btn')!
+  const mobileOverlay = document.getElementById('mobile-overlay')!
+  const mobilePanel = document.getElementById('mobile-panel')!
+
+  // Scroll detection
+  let ticking = false
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        header.classList.toggle('scrolled', window.scrollY > 50)
+        ticking = false
+      })
+      ticking = true
+    }
+  }, { passive: true })
+
+  // Initial check
+  header.classList.toggle('scrolled', window.scrollY > 50)
+
+  // Mobile menu
+  function openMobile() {
+    mobileOverlay.classList.remove('hidden')
+    requestAnimationFrame(() => {
+      mobileOverlay.classList.remove('opacity-0')
+      mobilePanel.classList.remove('translate-x-full')
+    })
+    document.body.style.overflow = 'hidden'
+  }
+
+  function closeMobile() {
+    mobileOverlay.classList.add('opacity-0')
+    mobilePanel.classList.add('translate-x-full')
+    setTimeout(() => {
+      mobileOverlay.classList.add('hidden')
+    }, 300)
+    document.body.style.overflow = ''
+  }
+
+  mobileMenuBtn.addEventListener('click', openMobile)
+  mobileCloseBtn.addEventListener('click', closeMobile)
+  mobileOverlay.addEventListener('click', closeMobile)
+
+  // Close mobile menu on nav link click
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', closeMobile)
+  })
+</script>

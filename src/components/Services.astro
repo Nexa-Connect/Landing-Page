@@ -1,0 +1,63 @@
+---
+import ServiceIcon from './icons/ServiceIcon.astro'
+
+const serviceTypes = ['ai', 'robot', 'automation', 'code', 'mobile', 'cloud']
+const defaultItems = [
+  { title: 'Serviços com IA', description: 'Soluções inteligentes utilizando inteligência artificial para otimizar processos e gerar insights valiosos para o seu negócio.' },
+  { title: 'Agentes de IA', description: 'Desenvolvimento de agentes autônomos capazes de executar tarefas complexas, automatizar atendimentos e auxiliar na tomada de decisões.' },
+  { title: 'Automações', description: 'Automatize processos repetitivos e ganhe eficiência. Integramos sistemas e criamos fluxos de trabalho que economizam tempo e recursos.' },
+  { title: 'Aplicações Web', description: 'Desenvolvimento de aplicações web modernas, responsivas e escaláveis, utilizando as tecnologias mais atuais do mercado.' },
+  { title: 'Aplicações Mobile', description: 'Criação de aplicativos móveis nativos e híbridos para iOS e Android, com foco em experiência do usuário e performance.' },
+  { title: 'Desenvolvimento de SaaS', description: 'Construímos plataformas SaaS completas, desde a concepção até o lançamento, com infraestrutura escalável e segura.' },
+]
+---
+
+<section id="servicos" class="relative py-24 md:py-32 bg-white overflow-hidden">
+  <!-- Background decoration -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-200 to-transparent"></div>
+  <div class="absolute -top-32 -right-32 w-96 h-96 bg-primary-100/40 rounded-full blur-[100px]"></div>
+  <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-primary-50/60 rounded-full blur-[80px]"></div>
+
+  <div class="relative max-w-[1200px] mx-auto px-6">
+    <!-- Section header -->
+    <div class="text-center mb-20 animate-on-scroll">
+      <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-primary-600 font-display mb-4 px-4 py-1.5 bg-primary-50 rounded-full border border-primary-100" data-i18n="services.label">Serviços</span>
+      <h2 class="font-display font-bold text-3xl md:text-5xl text-[#212020] mb-5 mt-4">
+        <span data-i18n="services.title">O que</span><span class="text-primary-600" data-i18n="services.titleHighlight"> oferecemos</span>
+      </h2>
+      <p class="text-[#666] text-lg max-w-2xl mx-auto font-body leading-relaxed" data-i18n="services.subtitle">
+        Soluções completas para transformar sua ideia em realidade digital.
+      </p>
+    </div>
+
+    <!-- Services grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      {serviceTypes.map((type, index) => (
+        <div
+          class="animate-on-scroll group relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-primary-200 shadow-sm hover:shadow-2xl hover:shadow-primary-600/8 hover:-translate-y-3 transition-all duration-400 overflow-hidden"
+          data-i18n-service={index}
+          style={`transition-delay: ${index * 0.08}s`}
+        >
+          {/* Card glow on hover */}
+          <div class="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-primary-100/0 group-hover:from-primary-50/50 group-hover:to-primary-100/30 transition-all duration-400 rounded-2xl"></div>
+
+          {/* Decorative corner */}
+          <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-100/0 to-primary-200/0 group-hover:from-primary-100/30 group-hover:to-primary-200/40 rounded-bl-[60px] transition-all duration-400"></div>
+
+          <div class="relative">
+            <div class="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-primary-600/30 group-hover:scale-110 transition-all duration-300 mb-6">
+              <ServiceIcon type={type} class="w-7 h-7" />
+            </div>
+            <h3 class="font-display font-semibold text-lg text-[#212020] mb-3 group-hover:text-primary-700 transition-colors" data-i18n-key="title">
+              {defaultItems[index].title}
+            </h3>
+            <p class="text-[#666] text-sm leading-relaxed font-body" data-i18n-key="description">
+              {defaultItems[index].description}
+            </p>
+
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,96 @@
+---
+import FlagIcon from './icons/FlagIcon.astro'
+
+const languages = [
+  { code: 'pt-BR', label: 'PT' },
+  { code: 'en', label: 'EN' },
+  { code: 'es', label: 'ES' },
+  { code: 'fr', label: 'FR' },
+  { code: 'de', label: 'DE' },
+  { code: 'ja', label: 'JA' },
+  { code: 'zh', label: 'ZH' },
+]
+---
+
+<div class="relative" id="lang-selector">
+  <!-- Trigger button -->
+  <button
+    type="button"
+    id="lang-trigger"
+    class="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 hover:border-primary-300 hover:bg-primary-50 transition-all duration-200 cursor-pointer"
+    aria-label="Selecionar idioma"
+  >
+    <span class="w-5 h-3.5 shrink-0 relative">
+      {languages.map((lang) => (
+        <span
+          data-flag-trigger={lang.code}
+          class="absolute inset-0"
+          style={lang.code === 'pt-BR' ? '' : 'display:none'}
+        >
+          <FlagIcon code={lang.code} class="w-full h-full" />
+        </span>
+      ))}
+    </span>
+    <span id="lang-current-code" class="text-sm font-medium text-primary-700 font-display">PT</span>
+    <svg class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200" id="lang-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- Dropdown -->
+  <div
+    id="lang-dropdown"
+    class="absolute right-0 top-full mt-2 w-44 bg-white rounded-xl border border-gray-100 shadow-xl opacity-0 invisible translate-y-2 transition-all duration-200 z-50 overflow-hidden"
+  >
+    {languages.map((lang) => (
+      <button
+        type="button"
+        data-lang-option={lang.code}
+        class="flex items-center gap-3 w-full px-4 py-2.5 text-left text-sm text-[#444] hover:bg-primary-50 transition-colors duration-150 cursor-pointer"
+      >
+        <FlagIcon code={lang.code} class="w-5 h-3.5 shrink-0" />
+        <span class="font-body">{lang.label}</span>
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  const trigger = document.getElementById('lang-trigger')!
+  const dropdown = document.getElementById('lang-dropdown')!
+  const chevron = document.getElementById('lang-chevron')!
+  let isOpen = false
+
+  function openDropdown() {
+    isOpen = true
+    dropdown.classList.remove('opacity-0', 'invisible', 'translate-y-2')
+    dropdown.classList.add('opacity-100', 'visible', 'translate-y-0')
+    chevron.style.transform = 'rotate(180deg)'
+  }
+
+  function closeDropdown() {
+    isOpen = false
+    dropdown.classList.add('opacity-0', 'invisible', 'translate-y-2')
+    dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0')
+    chevron.style.transform = ''
+  }
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation()
+    isOpen ? closeDropdown() : openDropdown()
+  })
+
+  document.addEventListener('click', (e) => {
+    if (isOpen && !(e.target as Element).closest('#lang-selector')) {
+      closeDropdown()
+    }
+  })
+
+  document.querySelectorAll('[data-lang-option]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang-option')!
+      ;(window as any).setLanguage(lang)
+      closeDropdown()
+    })
+  })
+</script>

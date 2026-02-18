@@ -1,0 +1,86 @@
+---
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Nexa Connect — Soluções em Software, IA e Automações',
+  description = 'Startup brasileira especializada em desenvolvimento de software, inteligência artificial e automações. Transformamos ideias em soluções digitais.',
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#61199E" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Sora:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script src="../i18n/engine.js"></script>
+    <script>
+      // Scroll-triggered animations with IntersectionObserver
+      function initScrollAnimations() {
+        const selector = '.animate-on-scroll, .animate-on-scroll-left, .animate-on-scroll-right, .animate-on-scroll-scale'
+        const elements = document.querySelectorAll(selector)
+
+        // Elements already in viewport on load (e.g. navigated via /#hash) get shown immediately
+        // Elements below the fold animate in on scroll
+        const viewportBottom = window.scrollY + window.innerHeight
+
+        elements.forEach((el) => {
+          const rect = el.getBoundingClientRect()
+          const elementTop = rect.top + window.scrollY
+
+          if (elementTop < viewportBottom - 50) {
+            // Already visible on load — show without animation
+            el.classList.add('visible')
+            ;(el as HTMLElement).style.transitionDuration = '0s'
+            // Restore transition after paint so future interactions still animate
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                ;(el as HTMLElement).style.transitionDuration = ''
+              })
+            })
+          }
+        })
+
+        // Observe remaining hidden elements for scroll animation
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible')
+              observer.unobserve(entry.target)
+            }
+          })
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
+
+        elements.forEach((el) => {
+          if (!el.classList.contains('visible')) {
+            observer.observe(el)
+          }
+        })
+      }
+
+      document.addEventListener('DOMContentLoaded', initScrollAnimations)
+    </script>
+  </body>
+</html>

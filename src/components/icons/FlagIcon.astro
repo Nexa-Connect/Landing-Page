@@ -1,0 +1,69 @@
+---
+interface Props {
+  code: string
+  class?: string
+}
+
+const { code, class: className = '' } = Astro.props
+---
+
+<span class={className}>
+  {code === 'pt-BR' && (
+    <svg viewBox="0 0 640 480" class="w-full h-full block rounded-sm">
+      <rect fill="#009B3A" width="640" height="480"/>
+      <polygon fill="#FEDF00" points="320,60 580,240 320,420 60,240"/>
+      <circle fill="#002776" cx="320" cy="240" r="95"/>
+      <path fill="#FFF" d="M225,240c0-40,25-75,60-90c-5-2-12-3-18-3c-52,0-95,43-95,95s43,95,95,95c6,0,13-1,18-3c-35-15-60-50-60-94z"/>
+    </svg>
+  )}
+  {code === 'en' && (
+    <svg viewBox="0 0 640 480" class="w-full h-full block rounded-sm">
+      <rect fill="#B22234" width="640" height="480"/>
+      <g fill="#FFF">
+        <rect y="37" width="640" height="37"/>
+        <rect y="111" width="640" height="37"/>
+        <rect y="185" width="640" height="37"/>
+        <rect y="259" width="640" height="37"/>
+        <rect y="333" width="640" height="37"/>
+        <rect y="407" width="640" height="37"/>
+      </g>
+      <rect fill="#3C3B6E" width="256" height="259"/>
+    </svg>
+  )}
+  {code === 'es' && (
+    <svg viewBox="0 0 640 480" class="w-full h-full block rounded-sm">
+      <rect fill="#AA151B" width="640" height="480"/>
+      <rect fill="#F1BF00" y="120" width="640" height="240"/>
+    </svg>
+  )}
+  {code === 'fr' && (
+    <svg viewBox="0 0 640 480" class="w-full h-full block rounded-sm">
+      <rect fill="#002395" width="213" height="480"/>
+      <rect fill="#FFF" x="213" width="214" height="480"/>
+      <rect fill="#ED2939" x="427" width="213" height="480"/>
+    </svg>
+  )}
+  {code === 'de' && (
+    <svg viewBox="0 0 640 480" class="w-full h-full block rounded-sm">
+      <rect fill="#000" width="640" height="160"/>
+      <rect fill="#DD0000" y="160" width="640" height="160"/>
+      <rect fill="#FFCC00" y="320" width="640" height="160"/>
+    </svg>
+  )}
+  {code === 'ja' && (
+    <svg viewBox="0 0 640 480" class="w-full h-full block rounded-sm">
+      <rect fill="#FFF" width="640" height="480"/>
+      <circle fill="#BC002D" cx="320" cy="240" r="120"/>
+    </svg>
+  )}
+  {code === 'zh' && (
+    <svg viewBox="0 0 640 480" class="w-full h-full block rounded-sm">
+      <rect fill="#DE2910" width="640" height="480"/>
+      <polygon fill="#FFDE00" points="160,72 176,120 228,120 186,152 202,200 160,168 118,200 134,152 92,120 144,120"/>
+      <polygon fill="#FFDE00" points="264,36 270,54 290,54 274,66 280,84 264,72 248,84 254,66 238,54 258,54"/>
+      <polygon fill="#FFDE00" points="312,72 318,90 338,90 322,102 328,120 312,108 296,120 302,102 286,90 306,90"/>
+      <polygon fill="#FFDE00" points="312,144 318,162 338,162 322,174 328,192 312,180 296,192 302,174 286,162 306,162"/>
+      <polygon fill="#FFDE00" points="264,180 270,198 290,198 274,210 280,228 264,216 248,228 254,210 238,198 258,198"/>
+    </svg>
+  )}
+</span>
